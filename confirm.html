@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <p>Thank you for your inquiry. A 4-digit verification number has been sent to your email. Please enter it below and submit for confirmation:</p>
+    <div class="form-group">
+        <input type="text" id="otp" name="otp">
+    </div>
+    <button onclick="validateOTP()" class="submit-btn">Validate</button>
+    <div id="message" class="message"></div>
+</div>
+
+<script>
+    function validateOTP() {
+        const userOtp = document.getElementById('otp').value;
+        const storedOtp = localStorage.getItem('otp');
+        const message = document.getElementById('message');
+
+        if (userOtp === storedOtp) {
+            message.textContent = "Validation Successful!";
+            message.style.color = "green";
+        } else {
+            message.textContent = "Incorrect OTP, try again.";
+            message.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
