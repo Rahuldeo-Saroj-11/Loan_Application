@@ -57,16 +57,25 @@
 </div>
 
 <script>
+    let attempts = 0;
+
     function validateOTP() {
         const userOtp = document.getElementById('otp').value;
         const storedOtp = localStorage.getItem('otp');
         const message = document.getElementById('message');
 
+        if (attempts >= 3) {
+            message.textContent = "Maximum attempts reached. Please try again later.";
+            message.style.color = "red";
+            return;
+        }
+
         if (userOtp === storedOtp) {
             message.textContent = "Validation Successful!";
             message.style.color = "green";
         } else {
-            message.textContent = "Incorrect OTP, try again.";
+            attempts++;
+            message.textContent = `Incorrect OTP, try again. Attempts left: ${3 - attempts}`;
             message.style.color = "red";
         }
     }
